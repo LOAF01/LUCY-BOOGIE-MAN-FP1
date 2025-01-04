@@ -1,10 +1,16 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 // css
 import './App.css';
 
 function App() {
   const titleRef = useRef(null);
+  
+  const [box1, setBox1] = useState(false);
+
+  function toggleBox(box, setBox) {
+      setBox(!box);
+  };
 
   useEffect(() => {
     const ref = titleRef.current;
@@ -49,8 +55,19 @@ function App() {
   return (
     <div className='base'>
       <h1 className='title' ref={titleRef} data-text='LUCY'>LUCY</h1>
-      <span className='left'>Boogie Man</span>
-      <span className='right'>Over the Christmas</span>
+      <div className='box' onClick={() => toggleBox(box1, setBox1)}>
+        <span className='left'>Boogie Man</span>
+        <div className={`content${box1 ? " show-ctt" : ""}`}>
+          <p>이런 날엔 부기맨이 찾아와 나를 잡아간대</p>
+          <p>깊고 어두운 옷장 속에 스르르르</p>
+          <p>그래 날 데려가 줘</p>
+          <p>차라리 너와 저 너머로 도망칠래</p>
+          <p>그럼 나도 부기맨</p>
+        </div>
+      </div>
+      <div className='box'>
+        <span className='right'>Over the Christmas</span>
+      </div>
     </div>
   );
 }
