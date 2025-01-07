@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useRef, useEffect, useState } from 'react';
 
 // css
@@ -6,34 +7,41 @@ import './App.css';
 function App() {
   const artistRef = useRef(null);
   
-  const [box1, setBox1] = useState(false);
-  const [box2, setBox2] = useState(false);
-
+  const [menu, setMenu] = useState(null);
+  const [displayedText, setDisplayedText] = useState([]);
   const [currentLine, setCurrentLine] = useState(0);
   const [index, setIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState([]);
 
-  function toggleBox(box, setBox) {
-    setBox(!box);
+  const texts = {
+    BM: [
+      "이런 날엔 부기맨이 찾아와 나를 잡아간대",
+      "깊고 어두운 옷장 속에 스르르르",
+      "그래 날 데려가 줘",
+      "차라리 너와 저 너머로 도망칠래",
+      "그럼 나도 부기맨",
+    ],
+    OTC: [
+      "내가 밤이 돼줄게",
+      "너는 눈이 돼줄래?",
+      "내가 빨강 해줄게",
+      "너가 내 초록 해줄래?",
+      "내가 널 받아낼게",
+      "너는 펑펑 내려줄래?",
+      "우리 같이 흩날려",
+      "세상을 하얗게 덮어볼래?",
+    ],
   };
 
-  const BM = [
-    "이런 날엔 부기맨이 찾아와 나를 잡아간대",
-    "깊고 어두운 옷장 속에 스르르르",
-    "그래 날 데려가 줘",
-    "차라리 너와 저 너머로 도망칠래",
-    "그럼 나도 부기맨",
-  ];
-  const OTC = [
-    "내가 밤이 돼줄게",
-    "너는 눈이 돼줄래?",
-    "내가 빨강 해줄게",
-    "너가 내 초록 해줄래?",
-    "내가 널 받아낼게",
-    "너는 펑펑 내려줄래?",
-    "우리 같이 흩날려",
-    "세상을 하얗게 덮어볼래?",
-  ];
+  function toggleMenu(p) {
+    if (menu === p) {
+      setMenu(null);
+    } else {
+      setCurrentLine(0);
+      setIndex(0);
+      setMenu(p);
+      setDisplayedText([]);
+    }
+  };
 
   function updatingText(newWord) {
     const updatedLines = [...displayedText];
@@ -42,32 +50,25 @@ function App() {
   };
   
   useEffect(() => {
-    if (box1) {
-      if (currentLine < BM.length) {
-        const line = BM[currentLine];
+    if (!menu) return;
 
-        const typingInterval = setInterval(() => {
-          if (index < line.length) {
-            const updatedText = updatingText(line[index]);
-            setDisplayedText(updatedText);
-            setIndex((prev) => prev + 1);
-          } else {
-            clearInterval(typingInterval);
-            setCurrentLine((prev) => prev + 1);
-            setIndex(0);
-          }
-        }, 150); // 타이핑 속도 (ms)
+    const lines = texts[menu];
+    if (currentLine >= lines.length) return;
 
-        return () => {
-          clearInterval(typingInterval);
-        };
+    const line = lines[currentLine];
+    const typingInterval = setInterval(() => {
+      if (index < line.length) {
+        setDisplayedText((prev) => updatingText(line[index]));
+        setIndex((prev) => prev + 1);
+      } else {
+        clearInterval(typingInterval);
+        setCurrentLine((prev) => prev + 1);
+        setIndex(0);
       }
-    } else {
-      setDisplayedText([]);
-      setCurrentLine(0);
-      setIndex(0);
-    }
-  }, [box1, currentLine, index]);
+    }, 150); // 타이핑 속도 (ms)
+
+    return () => clearInterval(typingInterval);
+  }, [menu, currentLine, index]);
 
   useEffect(() => {
     const ref = artistRef.current;
@@ -112,31 +113,21 @@ function App() {
   return (
     <div className='base'>
       <h1 className='artist' ref={artistRef} data-text='LUCY'>LUCY</h1>
-      <div className='box' onClick={() => toggleBox(box1, setBox1)}>
+
+      <div className='box' onClick={() => toggleMenu('BM')}>
         <span className='title left'>Boogie Man</span>
-        <div className={`content${box1 ? " show-ctt" : ""}`}>
-          {displayedText.map((a, i) => (
+        <div className={`content${menu === 'BM' ? " show-ctt" : ""}`}>
+          {menu === 'BM' && displayedText.map((a, i) => (
             <span key={i}>{a}</span>
           ))}
-
-          {/* <span>이런 날엔 부기맨이 찾아와 나를 잡아간대</span>
-          <span>깊고 어두운 옷장 속에 스르르르</span>
-          <span>그래 날 데려가 줘</span>
-          <span>차라리 너와 저 너머로 도망칠래</span>
-          <span>그럼 나도 부기맨</span> */}
         </div>
       </div>
-      <div className='box' onClick={() => toggleBox(box2, setBox2)}>
+      <div className='box' onClick={() => toggleMenu('OTC')}>
         <span className='title right'>Over the Christmas</span>
-        <div className={`content${box2 ? " show-ctt" : ""}`}>
-          <span><span>내가 밤이 돼줄게</span></span>
-          <span><span>너는 눈이 돼줄래?</span></span>
-          <span><span>내가 빨강 해줄게</span></span>
-          <span><span>너가 내 초록 해줄래?</span></span>
-          <span><span>내가 널 받아낼게</span></span>
-          <span><span>너는 펑펑 내려줄래?</span></span>
-          <span><span>우리 같이 흩날려</span></span>
-          <span><span>세상을 하얗게 덮여볼래?</span></span>
+        <div className={`content${menu === 'OTC' ? " show-ctt" : ""}`}>
+          {menu === 'OTC' && displayedText.map((a, i) => (
+            <span key={i}>{a}</span>
+          ))}
         </div>
       </div>
     </div>

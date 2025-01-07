@@ -55,13 +55,13 @@ body,
   justify-content: center;
   font-family: "GalmuriMono7", serif;
   font-size: 1em;
-  color: #ffc400;
+  color: transparent;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 1.5s ease-in-out;
+  /* transition: max-height 1.5s ease-in-out; */
 }
 .content.show-ctt {
-  min-height: 2em;
+  color: #ffc400;
   max-height: 500px;
 }
 .content.show-ctt span {
