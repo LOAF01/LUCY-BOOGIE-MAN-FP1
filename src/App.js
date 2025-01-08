@@ -40,7 +40,7 @@ function toggleMenu(p) {
       setMenu(null);
       setDisplayedText([]);
       setFadeOut(false);
-    }, 1500); // fade-out 지속 시간과 동일
+    }, 800);
   } else {
     setFadeOut(true);
     setTimeout(() => {
@@ -49,7 +49,7 @@ function toggleMenu(p) {
       setMenu(p);
       setDisplayedText([]);
       setFadeOut(false);
-    }, 1500); // fade-out 지속 시간과 동일
+    }, 800);
   }
 }
 

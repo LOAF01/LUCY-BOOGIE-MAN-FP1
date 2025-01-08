@@ -59,7 +59,7 @@ body,
   color: transparent;
   opacity: 1;
   overflow: hidden;
-  transition: max-height 1.5s ease-in-out, opacity .5s ease-out;
+  transition: max-height 1s ease-in-out, opacity .5s ease-out;
 }
 .content.show-ctt {
   max-height: 500px;
