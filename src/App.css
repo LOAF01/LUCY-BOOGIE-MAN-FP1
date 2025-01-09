@@ -10,8 +10,18 @@ body,
   align-items: center;
   justify-content: center;
   background-color: #1f1f1f;
+  background: url(/public/img/noise.png);
+  animation: bgNoise .5s steps(5) infinite;
   text-align: center;
   cursor: none;
+}
+@keyframes bgNoise {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 .artist {
@@ -28,7 +38,7 @@ body,
   content: attr(data-text);
   width: 100%;
   position:absolute;
-  background-color: #1f1f1f;
+  background-color: transparent;
   transition: clip-path 50ms esae-in;
 }
 .artist::before {
@@ -92,7 +102,7 @@ body,
   opacity: 0;
 }
 .content.show-ctt span {
-  padding-top: 16px;
+  margin-top: 16px;
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
