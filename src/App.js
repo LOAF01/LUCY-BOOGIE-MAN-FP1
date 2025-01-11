@@ -79,6 +79,14 @@ function App() {
     mouseChildRef.current.style.setProperty('--cursor-clr', color);
   };
 
+  function mouseenter() {
+    mouseRef.current.style.setProperty('--cursor-opacity', 1);
+  };
+
+  function mouseleave() {
+    mouseRef.current.style.setProperty('--cursor-opacity', 0);
+  };
+
   function toggleIsMuted() {
     setIsMuted((prev) => !prev);
   };
@@ -172,6 +180,8 @@ function App() {
   }, [isMuted]);
 
   useEffect(() => {
+    document.addEventListener('mouseenter', mouseenter);
+    document.addEventListener('mouseleave', mouseleave);
     document.addEventListener('mousemove', mousemove);
 
     if (!artistRef.current || !mouseRef.current) return;
@@ -207,6 +217,8 @@ function App() {
 
     return () => {
       clearInterval(glitchInterval);
+      document.removeEventListener('mouseenter', mouseenter);
+      document.removeEventListener('mouseleave', mouseleave);
       document.removeEventListener('mousemove', mousemove);
     };
   }, []);
