@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import { Howl } from 'howler';
 
 // css
 import './App.css';
@@ -9,11 +10,19 @@ function App() {
   const mouseRef = useRef(null);
   const mouseChildRef = useRef(null);
   
+  const [isMuted, setIsMuted] = useState(true);
   const [menu, setMenu] = useState(null);
   const [displayedText, setDisplayedText] = useState([]);
   const [currentLine, setCurrentLine] = useState(0);
   const [index, setIndex] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+
+  let bgm = null;
+  let howlerTyping = null;
+  const howlerTitle = new Howl({
+    src: ['/sound/FP1_title_hover.mp3']
+  });
 
   const texts = {
     BM: [
@@ -70,6 +79,10 @@ function App() {
     mouseChildRef.current.style.setProperty('--cursor-clr', color);
   };
 
+  function toggleIsMuted() {
+    setIsMuted((prev) => !prev);
+  };
+
   function toggleMenu(p) {
     if (menu === p) {
       setFadeOut(true);
@@ -95,9 +108,34 @@ function App() {
     updatedLines[currentLine] = (updatedLines[currentLine] || "") + newWord;
     return updatedLines
   };
-  
+
   useEffect(() => {
-    if (!menu) return;
+    if (!isTyping) return;
+
+    howlerTyping = new Howl({
+      src: ['/sound/FP1_typing.mp3'],
+      loop: true
+    });
+    howlerTyping.play();
+
+    return (() => {
+      howlerTyping.unload();
+    })
+  }, [isTyping]);
+
+  useEffect(() => {
+    if (!menu) {
+      setIsTyping(false);
+      return;
+    } else if (menu === 'BM' || menu === 'OTC') {
+      let menuTL = texts[menu].length - 1;
+      let menuTLTI = texts[menu][menuTL].length - 1;
+      if (currentLine === 0 && index === 0) {
+        setIsTyping(true);
+      } else if (currentLine === menuTL && index === menuTLTI) {
+        setIsTyping(false);
+      }
+    }
 
     const lines = texts[menu];
     if (currentLine >= lines.length) return;
@@ -105,25 +143,39 @@ function App() {
     const line = lines[currentLine];
     const typingInterval = setInterval(() => {
       if (index < line.length) {
-        setDisplayedText((prev) => updatingText(line[index]));
+        setDisplayedText(() => updatingText(line[index]));
         setIndex((prev) => prev + 1);
       } else {
         clearInterval(typingInterval);
         setCurrentLine((prev) => prev + 1);
         setIndex(0);
       }
-    }, 150); // 타이핑 속도 (ms)
+    }, 180); // 타이핑 속도 (ms)
 
-    return () => clearInterval(typingInterval);
+    return () => {
+      clearInterval(typingInterval);
+    };
   }, [menu, currentLine, index]);
 
   useEffect(() => {
-    if (!artistRef.current || !mouseRef.current) return;
+    if (isMuted) return;
+    
+    bgm = new Howl({
+      src: ['/sound/FP1_background.mp3'],
+      loop: true
+    });
+    bgm.play();
 
+    return (() => {
+      bgm.unload();
+    })
+  }, [isMuted]);
+
+  useEffect(() => {
     document.addEventListener('mousemove', mousemove);
 
+    if (!artistRef.current || !mouseRef.current) return;
     let cnt = 0;
-
     const glitchInterval = setInterval(() => {
       // artistRef.current
       const skew = Math.random() * 10 - 5;
@@ -161,6 +213,10 @@ function App() {
 
   return (
     <div className='base'>
+      <span className="material-icons" onClick={() => toggleIsMuted()}>
+        {isMuted ? "volume_off" : "volume_up"}
+      </span>
+
       <div ref={mouseRef} id='mouse-cursor'>
         <div ref={mouseChildRef}></div>
       </div>
@@ -168,7 +224,9 @@ function App() {
       <h1 className='artist' ref={artistRef} data-text='LUCY'>LUCY</h1>
 
       <div className='box'>
-        <span data-cursor='title' className='title left' onClick={() => toggleMenu('BM')}>Boogie Man</span>
+        <span data-cursor='title' className='title left' onMouseEnter={() => howlerTitle.play()} onClick={() => toggleMenu('BM')}>
+          Boogie Man
+        </span>
         <div className={`content${menu === 'BM' ? " show-ctt" : ""}${fadeOut ? " fade-out" : ""}`}>
           {menu === 'BM' && displayedText.map((a, i) => (
             <span data-cursor='liryc' key={i}>{a}</span>
@@ -176,7 +234,9 @@ function App() {
         </div>
       </div>
       <div className='box'>
-        <span data-cursor='title' className='title right' onClick={() => toggleMenu('OTC')}>Over the Christmas</span>
+        <span data-cursor='title' className='title right' onMouseEnter={() => howlerTitle.play()} onClick={() => toggleMenu('OTC')}>
+          Over the Christmas
+        </span>
         <div className={`content${menu === 'OTC' ? " show-ctt" : ""}${fadeOut ? " fade-out" : ""}`}>
           {menu === 'OTC' && displayedText.map((a, i) => (
             <span data-cursor='liryc' key={i}>{a}</span>

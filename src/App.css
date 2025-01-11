@@ -24,6 +24,18 @@ body,
   }
 }
 
+.material-icons {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+}
+
 .artist {
   margin-top: 0;
   margin-bottom: 100px;
