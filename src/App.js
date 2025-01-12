@@ -21,8 +21,11 @@ function App() {
   let bgm = null;
   let howlerTyping = null;
   const howlerTitle = new Howl({
-    src: ['/sound/FP1_title_hover.mp3']
-  });
+    src: ['https://loaf01.github.io/fp1/FP1_title_hover.mp3'],
+    preload: true,
+    autoplay: false,
+    autoUnlock: true,
+  });  
 
   const texts = {
     BM: [
@@ -121,8 +124,9 @@ function App() {
     if (!isTyping) return;
 
     howlerTyping = new Howl({
-      src: ['/sound/FP1_typing.mp3'],
-      loop: true
+      src: ['https://loaf01.github.io/fp1/FP1_typing.mp3'],
+      autoplay: false,
+      loop: true,
     });
     howlerTyping.play();
 
@@ -167,11 +171,11 @@ function App() {
 
   useEffect(() => {
     if (isMuted) return;
-    
     bgm = new Howl({
-      src: ['/sound/FP1_background.mp3'],
-      loop: true
-    });
+      src: ['https://loaf01.github.io/fp1/FP1_background.mp3'], 
+      preload: true,
+      loop: true,
+    })
     bgm.play();
 
     return (() => {
