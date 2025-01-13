@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Howl } from 'howler';
 
 // css
@@ -34,7 +34,7 @@ function IntroSheet(props) {
     setTimeout(() => {
       setModal(!modal);
     }, 5000);
-  }
+  };
 
   useEffect(() => {
     if (!introBgm) return;
@@ -66,6 +66,21 @@ function IntroSheet(props) {
       modalSE.unload();
     }
   },[modalBgm]);
+
+  useEffect(() => {
+
+    const dripSE = new Howl({
+      src: ['https://loaf01.github.io/fp1/FP1_drip.mp3'],
+      preload: true,
+      autoplay: false,
+    });
+
+    document.addEventListener('mousedown', () => dripSE.play());
+
+    return () => {
+      dripSE.unload();
+    }
+  },[]);
 
   return (
     <div className="intro-bg">
