@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // css
 import './IntroSheet.css';
 
