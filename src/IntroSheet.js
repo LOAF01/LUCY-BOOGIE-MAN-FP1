@@ -73,6 +73,7 @@ function IntroSheet(props) {
         <div className='modal-box'>
           <div style={{fontSize: '50px', textShadow: '0 0 5px #666'}}>⚠️</div>
           <p>Find the RIGHT place and click.</p>
+          <p>[SOUND RECOMMENDED]</p>
           <button onClick={clickModal}>OK</button>
         </div>
       </div>}
