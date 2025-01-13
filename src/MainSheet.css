@@ -133,7 +133,7 @@
   background-repeat: no-repeat;
   transition: background-size 0.2s ease-in;
 }
-.title:hover {
+.title.left:hover, .title.right:hover {
   background-size: 100% 100%;
   filter: drop-shadow(0 0 5px #f9f7f1);
 }
