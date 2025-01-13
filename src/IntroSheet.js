@@ -29,7 +29,7 @@ function IntroSheet(props) {
     setModalBgm(true);
 
     document.documentElement.style.setProperty("--modal-opacity", 0);
-    document.documentElement.style.setProperty("--modal-scale", 2);
+    document.documentElement.style.setProperty("--modal-scale", 6);
 
     setTimeout(() => {
       setModal(!modal);
