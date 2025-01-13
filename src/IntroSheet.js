@@ -68,6 +68,12 @@ function IntroSheet(props) {
   },[modalBgm]);
 
   useEffect(() => {
+    const disableContextMenu = (e) => e.preventDefault();
+    const disableSelectStart = (e) => e.preventDefault();
+    const disableDragStart = (e) => e.preventDefault();
+    document.body.addEventListener("contextmenu", disableContextMenu);
+    document.body.addEventListener("selectstart", disableSelectStart);
+    document.body.addEventListener("dragstart", disableDragStart);
 
     const dripSE = new Howl({
       src: ['https://loaf01.github.io/fp1/FP1_drip.mp3'],
@@ -79,6 +85,9 @@ function IntroSheet(props) {
 
     return () => {
       dripSE.unload();
+      document.body.removeEventListener("contextmenu", disableContextMenu);
+      document.body.removeEventListener("selectstart", disableSelectStart);
+      document.body.removeEventListener("dragstart", disableDragStart);
     }
   },[]);
 
