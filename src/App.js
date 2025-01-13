@@ -2,6 +2,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Howl } from 'howler';
 
+// js
+import IntroSheet from './IntroSheet.js';
+
 // css
 import './App.css';
 
@@ -10,7 +13,8 @@ function App() {
   const mouseRef = useRef(null);
   const mouseChildRef = useRef(null);
   
-  const [isMuted, setIsMuted] = useState(true);
+  const [showIntro, setShowIntro] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [menu, setMenu] = useState(null);
   const [displayedText, setDisplayedText] = useState([]);
   const [currentLine, setCurrentLine] = useState(0);
@@ -229,36 +233,40 @@ function App() {
 
   return (
     <div className='base'>
-      <span className="material-icons" onClick={() => toggleIsMuted()}>
-        {isMuted ? "volume_off" : "volume_up"}
-      </span>
 
       <div ref={mouseRef} id='mouse-cursor'>
         <div ref={mouseChildRef}></div>
       </div>
-    
-      <h1 className='artist' ref={artistRef} data-text='LUCY'>LUCY</h1>
 
-      <div className='box'>
-        <span data-cursor='title' className='title left' onMouseEnter={() => howlerTitle.play()} onClick={() => toggleMenu('BM')}>
-          Boogie Man
+      {showIntro ? <IntroSheet setShowIntro={setShowIntro}/> : 
+      (<>
+        <span className="material-icons" onClick={() => toggleIsMuted()}>
+          {isMuted ? "volume_off" : "volume_up"}
         </span>
-        <div className={`content${menu === 'BM' ? " show-ctt" : ""}${fadeOut ? " fade-out" : ""}`}>
-          {menu === 'BM' && displayedText.map((a, i) => (
-            <span data-cursor='liryc' key={i}>{a}</span>
-          ))}
+      
+        <h1 className='artist' ref={artistRef} data-text='LUCY'>LUCY</h1>
+
+        <div className='box'>
+          <span data-cursor='title' className='title left' onMouseEnter={() => howlerTitle.play()} onClick={() => toggleMenu('BM')}>
+            Boogie Man
+          </span>
+          <div className={`content${menu === 'BM' ? " show-ctt" : ""}${fadeOut ? " fade-out" : ""}`}>
+            {menu === 'BM' && displayedText.map((a, i) => (
+              <span data-cursor='liryc' key={i}>{a}</span>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className='box'>
-        <span data-cursor='title' className='title right' onMouseEnter={() => howlerTitle.play()} onClick={() => toggleMenu('OTC')}>
-          Over the Christmas
-        </span>
-        <div className={`content${menu === 'OTC' ? " show-ctt" : ""}${fadeOut ? " fade-out" : ""}`}>
-          {menu === 'OTC' && displayedText.map((a, i) => (
-            <span data-cursor='liryc' key={i}>{a}</span>
-          ))}
+        <div className='box'>
+          <span data-cursor='title' className='title right' onMouseEnter={() => howlerTitle.play()} onClick={() => toggleMenu('OTC')}>
+            Over the Christmas
+          </span>
+          <div className={`content${menu === 'OTC' ? " show-ctt" : ""}${fadeOut ? " fade-out" : ""}`}>
+            {menu === 'OTC' && displayedText.map((a, i) => (
+              <span data-cursor='liryc' key={i}>{a}</span>
+            ))}
+          </div>
         </div>
-      </div>
+      </>)}
     </div>
   );
 }

@@ -1,0 +1,24 @@
+.intro-bg {
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-eyes {
+  display: flex;
+  flex-direction: row;
+}
+.eye {
+  width: 280px;
+  height: 300px;
+  background-image: radial-gradient(#e50000, transparent, transparent);
+}
+
+.intro-lip {
+  background-repeat: no-repeat;
+}
