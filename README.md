@@ -1,4 +1,4 @@
-# LUCY BOOGIE MAN 웹사이트 프로젝트
+# 👻 LUCY BOOGIE MAN 웹사이트 프로젝트
 
 ## 개요
 
