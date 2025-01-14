@@ -1,7 +1,6 @@
-# 👻 LUCY BOOGIE MAN 웹사이트 프로젝트
+# 👻 LUCY BOOGIE MAN 웹사이트 Fan Project
 
 ## 개요
-
 - 진행 기간: 2025/01/02 ~ 2025/01/13
 - 사용 기술: React, JavaScript, HTML
 - 사용 라이브러리: Howler
