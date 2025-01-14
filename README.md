@@ -1,4 +1,4 @@
-## LUCY BOOGIE MAN 웹사이트 프로젝트
+# LUCY BOOGIE MAN 웹사이트 프로젝트
 
 ## 개요
 
@@ -23,8 +23,8 @@ BAND LUCY의 6번째 싱글 앨범 BOOGIE MAN의 수록곡을 테마로 제작�
 - 웹 링크 | [LUCY BOOGIE MAN 웹사이트](https://loaf01.github.io/LUCY-BOOGIE-MAN-FP1/)
 - 시연 영상 | [Instagram 시연 영상](https://www.instagram.com/reel/DEwtXBUSOat/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA%3D%3D)
 - 화면 자료 | 
-> ![접속 화면]()
-> ![메인 화면]()
+> ![접속 화면](https://github.com/LOAF01/LUCY-BOOGIE-MAN-FP1/blob/main/landing_page.png)
+> ![메인 화면](https://github.com/LOAF01/LUCY-BOOGIE-MAN-FP1/blob/main/main_page.png)
 
 ## 레포지토리
 - GitHub | <https://github.com/LOAF01/LUCY-BOOGIE-MAN-FP1.git>
