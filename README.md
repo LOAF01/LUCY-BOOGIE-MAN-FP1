@@ -42,42 +42,42 @@ BAND LUCY의 6번째 싱글 앨범 BOOGIE MAN의 수록곡을 테마로 제작�
 ## 회고
 ### 주요 문제 해결 및 구현 방법
 1. 이미지 드래그 및 잔상 문제 해결
-  - opacity: 0 상태에서도 드래그되는 이미지의 문제를 해결하기 위해, addEventListener를 사용해 드래그, 선택, 우클릭 이벤트를 비활성화.
-
-  ```
-    const disableContextMenu = (e) => e.preventDefault();
-    const disableSelectStart = (e) => e.preventDefault();
-    const disableDragStart = (e) => e.preventDefault();
+    - opacity: 0 상태에서도 드래그되는 이미지의 문제를 해결하기 위해, addEventListener를 사용해 드래그, 선택, 우클릭 이벤트를 비활성화.
   
-    document.body.addEventListener("contextmenu", disableContextMenu);
-    document.body.addEventListener("selectstart", disableSelectStart);
-    document.body.addEventListener("dragstart", disableDragStart);
-  ```
+    ```
+      const disableContextMenu = (e) => e.preventDefault();
+      const disableSelectStart = (e) => e.preventDefault();
+      const disableDragStart = (e) => e.preventDefault();
+    
+      document.body.addEventListener("contextmenu", disableContextMenu);
+      document.body.addEventListener("selectstart", disableSelectStart);
+      document.body.addEventListener("dragstart", disableDragStart);
+    ```
 
 2. 커스텀 마우스 커서
-  - CSS로 cursor 속성을 변경하여 이미지나 스타일을 지정.
-
-  ```
-    * {
-          cursor: url('/public/img/c_default.png') 0 0, auto;
-      }
-  ```
+    - CSS로 cursor 속성을 변경하여 이미지나 스타일을 지정.
+  
+    ```
+      * {
+            cursor: url('/public/img/c_default.png') 0 0, auto;
+        }
+    ```
 
 3. 효과음 구현
-  - Howler 라이브러리를 사용하여 사운드 재생 및 관리.
-  - Web Audio API 기반으로 크로스 브라우저 지원과 캐싱 기능을 제공.
+    - Howler 라이브러리를 사용하여 사운드 재생 및 관리.
+    - Web Audio API 기반으로 크로스 브라우저 지원과 캐싱 기능을 제공.
 
 4. 타이핑 효과 구현
-  - React 상태 관리와 useEffect를 활용해 텍스트를 한 글자씩 출력.
-  - 비동기 상태 업데이트 문제를 함수화하여 해결.
+    - React 상태 관리와 useEffect를 활용해 텍스트를 한 글자씩 출력.
+    - 비동기 상태 업데이트 문제를 함수화하여 해결.
 
 5. 글리치 효과
-  - clip-path와 polygon을 활용해 랜덤 높이값으로 텍스트와 배경에 글리치 효과 적용.
-  - setInterval을 사용해 동적으로 스타일 업데이트.
+    - clip-path와 polygon을 활용해 랜덤 높이값으로 텍스트와 배경에 글리치 효과 적용.
+    - setInterval을 사용해 동적으로 스타일 업데이트.
 
 6. 페이지 구조화와 컴포넌트화
-  - 기능별, 페이지별로 컴포넌트를 나누어 관리.
-  - 프로젝트 확장성과 유지보수를 고려한 설계.
+    - 기능별, 페이지별로 컴포넌트를 나누어 관리.
+    - 프로젝트 확장성과 유지보수를 고려한 설계.
 
 
 ## 느낀 점
