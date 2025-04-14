@@ -5,7 +5,7 @@
 - 진행 기간: 2025/01/02 ~ 2025/01/13
 - 사용 기술: React, JavaScript, HTML
 - 사용 라이브러리: Howler
-- 배포 플랫폼: GitHub Pages
+- 배포 플랫폼: GitHub Pages, AWS
 
 
 ## 프로젝트 소개
@@ -23,7 +23,8 @@ BAND LUCY의 6번째 싱글 앨범 BOOGIE MAN의 수록곡을 테마로 제작�
 
 
 ## 시연
-- 웹 링크 | [LUCY BOOGIE MAN 웹사이트](https://loaf01.github.io/LUCY-BOOGIE-MAN-FP1/)
+- 웹 링크(GitHub Pages) | [LUCY BOOGIE MAN 웹사이트](https://loaf01.github.io/LUCY-BOOGIE-MAN-FP1/)
+- 웹 링크(AWS) | [LUCY BOOGIE MAN 웹사이트](https://dandelionqz-fp1.site/lucy-boogie-man-fp1)
 - 화면 자료 | 
 > ![접속 화면](https://github.com/LOAF01/LUCY-BOOGIE-MAN-FP1/blob/main/landing_page.png)
 > ![메인 화면](https://github.com/LOAF01/LUCY-BOOGIE-MAN-FP1/blob/main/main_page.png)
